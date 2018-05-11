@@ -1,0 +1,525 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "westeurope"
+    },
+    "virtualMachineName": {
+      "type": "string",
+      "defaultValue": "vb-rheln8"
+    },
+    "virtualMachineSize": {
+      "type": "string",
+      "defaultValue": "Standard_F16s",
+      "allowedValues": [
+        "Standard_DS1",
+        "Standard_DS2",
+        "Standard_DS3",
+        "Standard_DS4",
+        "Standard_DS11",
+        "Standard_DS12",
+        "Standard_DS13",
+        "Standard_DS14",
+        "Standard_A0",
+        "Standard_A1",
+        "Standard_A2",
+        "Standard_A3",         
+        "Standard_A5",           
+        "Standard_A4",           
+        "Standard_A6",           
+        "Standard_A7",           
+        "Basic_A0",              
+        "Basic_A1",              
+        "Basic_A2",              
+        "Basic_A3",              
+        "Basic_A4",              
+        "Standard_D1_v2",
+        "Standard_D2_v2",        
+        "Standard_D3_v2",        
+        "Standard_D4_v2",        
+        "Standard_D5_v2",        
+        "Standard_D11_v2",       
+        "Standard_D12_v2",       
+        "Standard_D13_v2",       
+        "Standard_D14_v2",       
+        "Standard_D15_v2",       
+        "Standard_D2_v2_Promo",
+        "Standard_D3_v2_Promo",  
+        "Standard_D4_v2_Promo",  
+        "Standard_D5_v2_Promo",  
+        "Standard_D11_v2_Promo", 
+        "Standard_D12_v2_Promo", 
+        "Standard_D13_v2_Promo", 
+        "Standard_D14_v2_Promo", 
+        "Standard_F1",          
+        "Standard_F2",           
+        "Standard_F4",           
+        "Standard_F8",           
+        "Standard_F16",          
+        "Standard_A1_v2",        
+        "Standard_A2m_v2",      
+        "Standard_A2_v2",        
+        "Standard_A4m_v2",       
+        "Standard_A4_v2",        
+        "Standard_A8m_v2",       
+        "Standard_A8_v2",        
+        "Standard_D1",           
+        "Standard_D2",           
+        "Standard_D3",           
+        "Standard_D4",           
+        "Standard_D11",          
+        "Standard_D12",          
+        "Standard_D13",          
+        "Standard_D14",          
+        "Standard_DS1_v2",       
+        "Standard_DS2_v2",       
+        "Standard_DS3_v2",       
+        "Standard_DS4_v2",       
+        "Standard_DS5_v2",       
+        "Standard_DS11_v2",      
+        "Standard_DS12_v2",     
+        "Standard_DS13_v2",      
+        "Standard_DS14_v2",      
+        "Standard_DS15_v2",      
+        "Standard_DS2_v2_Promo",
+        "Standard_DS3_v2_Promo", 
+        "Standard_DS4_v2_Promo", 
+        "Standard_DS5_v2_Promo", 
+        "Standard_DS11_v2_Promo",
+        "Standard_DS12_v2_Promo",
+        "Standard_DS13_v2_Promo",
+        "Standard_DS14_v2_Promo",
+        "Standard_F1s",          
+        "Standard_F2s",          
+        "Standard_F4s",          
+        "Standard_F8s",          
+        "Standard_F16s",         
+        "Standard_H8",           
+        "Standard_H16",          
+        "Standard_H8m",          
+        "Standard_H16m",         
+        "Standard_H16r",         
+        "Standard_H16mr",        
+        "Standard_G1",           
+        "Standard_G2",           
+        "Standard_G3",           
+        "Standard_G4",           
+        "Standard_G5",           
+        "Standard_GS1",          
+        "Standard_GS2",          
+        "Standard_GS3",          
+        "Standard_GS4",          
+        "Standard_GS5",          
+        "Standard_A8",           
+        "Standard_A9",           
+        "Standard_A10",          
+        "Standard_A11",          
+        "Standard_NV6",          
+        "Standard_NV12",         
+        "Standard_NV24"
+      ],
+      "metadata": {
+        "description": "Size of the VM"
+      }
+    },
+    "adminUsername": {
+      "type": "string",
+      "defaultValue": "ocadmin"
+    },
+    "virtualNetworkName": {
+      "type": "string",
+      "defaultValue": "vb-vnet-FrontNet"
+    },
+    "networkInterfaceName": {
+      "type": "string",
+      "defaultValue": "vb-rheln8-n1"
+    },
+    "networkInterfaceName2": {
+      "type": "string",
+      "defaultValue": "vb-rheln8-n2"
+    },
+    "networkInterfaceName3": {
+      "type": "string",
+      "defaultValue": "vb-rheln8-n3"
+    },
+    "networkInterfaceName4": {
+      "type": "string",
+      "defaultValue": "vb-rheln8-n4"
+    },
+    "networkInterfaceName5": {
+      "type": "string",
+      "defaultValue": "vb-rheln8-n5"
+    },
+    "networkInterfaceName6": {
+      "type": "string",
+      "defaultValue": "vb-rheln8-n6"
+    },
+    "networkInterfaceName7": {
+      "type": "string",
+      "defaultValue": "vb-rheln8-n7"
+    },
+    "networkInterfaceName8": {
+      "type": "string",
+      "defaultValue": "vb-rheln8-n8"
+    },
+    "networkSecurityGroupName": {
+      "type": "string",
+      "defaultValue": "vb-rheln8-nsg"
+    },
+    "adminPassword": {
+      "type": "securestring"
+    },
+    "storageAccountName": {
+      "type": "string",
+      "defaultValue": "vbrheln8os"
+    },
+    "subnetName": {
+      "type": "string",
+      "defaultValue": "FrontNetSubNet"
+    },
+    "publicIpAddressName": {
+      "type": "string",
+      "defaultValue": "vbrheln8ip"
+    },
+    "publicIpAddressType": {
+      "type": "string",
+      "defaultValue": "Static"
+    }
+  },
+  "variables": {
+    "vnetId": "[resourceId('vb-WinMultiNicRDMA','Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
+  },
+  "resources": [
+    {
+      "name": "[parameters('virtualMachineName')]",
+      "type": "Microsoft.Compute/virtualMachines",
+      "apiVersion": "2016-04-30-preview",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]",
+        "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName2'))]",
+        "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName3'))]",
+        "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName4'))]",
+        "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName5'))]",
+        "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName6'))]",
+        "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName7'))]",
+        "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName7'))]"
+      ],
+      "properties": {
+        "osProfile": {
+          "computerName": "[parameters('virtualMachineName')]",
+          "adminUsername": "[parameters('adminUsername')]",
+          "adminPassword": "[parameters('adminPassword')]"
+        },
+        "hardwareProfile": {
+          "vmSize": "[parameters('virtualMachineSize')]"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "RedHat",
+            "Offer": "RHEL",
+            "Sku": "7.3",
+            "version": "latest"
+          },
+          "osDisk": {
+            "createOption": "fromImage",
+            "vhd": {
+              "uri": "[concat(concat(reference(resourceId('vb-WinMultiNicRDMA', 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2015-06-15').primaryEndpoints['blob'], 'vhds/'), parameters('virtualMachineName'), 'os6262.vhd')]"
+            },
+            "name": "[parameters('virtualMachineName')]"
+          },
+          "dataDisks": []
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName'))]",
+              "properties": {
+                "primary": true
+              }
+            },
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName2'))]",
+              "properties": {
+                "primary": false
+              }
+            },
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName3'))]",
+              "properties": {
+                "primary": false
+              }
+            },
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName4'))]",
+              "properties": {
+                "primary": false
+              }
+            },
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName5'))]",
+              "properties": {
+                "primary": false
+              }
+            },
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName6'))]",
+              "properties": {
+                "primary": false
+              }
+            },
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName7'))]",
+              "properties": {
+                "primary": false
+              }
+            },
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName8'))]",
+              "properties": {
+                "primary": false
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "[parameters('networkInterfaceName')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2016-09-01",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/publicIpAddresses/', parameters('publicIpAddressName'))]",
+        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "subnet": {
+                "id": "[variables('subnetRef')]"
+              },
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIpAddress": {
+                "id": "[resourceId('vb-WinMultiNicRDMA','Microsoft.Network/publicIpAddresses', parameters('publicIpAddressName'))]"
+              }
+            }
+          }
+        ],
+        "networkSecurityGroup": {
+          "id": "[resourceId('vb-WinMultiNicRDMA', 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+        }
+      }
+    },
+    {
+      "name": "[parameters('networkInterfaceName2')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2016-09-01",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "subnet": {
+                "id": "[variables('subnetRef')]"
+              },
+              "privateIPAllocationMethod": "Dynamic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('networkInterfaceName3')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2016-09-01",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "subnet": {
+                "id": "[variables('subnetRef')]"
+              },
+              "privateIPAllocationMethod": "Dynamic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('networkInterfaceName4')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2016-09-01",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "subnet": {
+                "id": "[variables('subnetRef')]"
+              },
+              "privateIPAllocationMethod": "Dynamic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('networkInterfaceName5')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2016-09-01",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "subnet": {
+                "id": "[variables('subnetRef')]"
+              },
+              "privateIPAllocationMethod": "Dynamic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('networkInterfaceName6')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2016-09-01",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "subnet": {
+                "id": "[variables('subnetRef')]"
+              },
+              "privateIPAllocationMethod": "Dynamic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('networkInterfaceName7')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2016-09-01",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "subnet": {
+                "id": "[variables('subnetRef')]"
+              },
+              "privateIPAllocationMethod": "Dynamic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('networkInterfaceName8')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2016-09-01",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "subnet": {
+                "id": "[variables('subnetRef')]"
+              },
+              "privateIPAllocationMethod": "Dynamic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('publicIpAddressName')]",
+      "type": "Microsoft.Network/publicIpAddresses",
+      "apiVersion": "2016-09-01",
+      "location": "[parameters('location')]",
+      "properties": {
+        "publicIpAllocationMethod": "[parameters('publicIpAddressType')]"
+      }
+    },
+    {
+      "name": "[parameters('networkSecurityGroupName')]",
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2016-09-01",
+      "location": "[parameters('location')]",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "default-allow-ssh",
+            "properties": {
+              "priority": 1000,
+              "sourceAddressPrefix": "*",
+              "protocol": "TCP",
+              "destinationPortRange": "22",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+          {
+            "name": "webmin",
+            "properties": {
+              "priority": 1010,
+              "sourceAddressPrefix": "*",
+              "protocol": "TCP",
+              "destinationPortRange": "10000",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "outputs": {
+    "adminUsername": {
+      "type": "string",
+      "value": "[parameters('adminUsername')]"
+    }
+  }
+}
