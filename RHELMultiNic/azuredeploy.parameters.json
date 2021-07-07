@@ -24,7 +24,7 @@
       "value": "vb-winstore-nsg"
     },
     "adminPassword": {
-      "value": "YOUPASSWORD"
+      "value": "YOURPASS"
     },
     "storageAccountName": {
       "value": "vbwinstoreos"

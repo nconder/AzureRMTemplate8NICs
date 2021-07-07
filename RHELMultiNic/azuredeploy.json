@@ -1,5 +1,5 @@
 {
-  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "location": {
@@ -101,7 +101,6 @@
         "Standard_H8m",          
         "Standard_H16m",         
         "Standard_H16r",         
-        "Standard_H16mr",        
         "Standard_G1",           
         "Standard_G2",           
         "Standard_G3",           

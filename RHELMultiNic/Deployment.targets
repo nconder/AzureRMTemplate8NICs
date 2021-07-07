@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -68,10 +69,7 @@
       <MsBuildProperties>Configuration=$(Configuration);Platform=$(Platform)</MsBuildProperties>
     </PropertyGroup>
 
-    <MSBuild Projects="@(ProjectReference)"
-             BuildInParallel="$(BuildInParallel)"
-             Properties="$(MsBuildProperties)"
-             Targets="%(ProjectReference.Targets)" />
+    <MSBuild Projects="@(ProjectReference)" BuildInParallel="$(BuildInParallel)" Properties="$(MsBuildProperties)" Targets="%(ProjectReference.Targets)" />
 
     <ItemGroup>
       <BuildProjectReferencesOutput Include="%(ProjectReference.IncludeFilePath)">
@@ -90,9 +88,8 @@
     </PropertyGroup>
   </Target>
 
-  <!-- Appends each of the deployment project's content output files with metadata indicating its relative path from the deployment project's folder. -->
-  <Target Name="_CalculateContentOutputRelativePaths"
-          Outputs="%(DeploymentProjectContentOutput.Identity)">
+  <!--  Appends each of the deployment project's content output files with metadata indicating its relative path from the deployment project's folder  -->
+  <Target Name="_CalculateContentOutputRelativePaths" Outputs="%(DeploymentProjectContentOutput.Identity)">
     <PropertyGroup>
       <_OriginalIdentity>%(DeploymentProjectContentOutput.Identity)</_OriginalIdentity>
       <_RelativePath>$(_OriginalIdentity.Replace('$(MSBuildProjectDirectory)', ''))</_RelativePath>
@@ -117,7 +114,7 @@
 
   <!-- Custom target to clean up local deployment staging files -->
   <Target Name="DeleteBinObjFolders" BeforeTargets="Clean">
-    <RemoveDir Directories="$(OutputPath)" />  
+    <RemoveDir Directories="$(OutputPath)" />
     <RemoveDir Directories="$(BaseIntermediateOutputPath)" />
   </Target>
 </Project>
